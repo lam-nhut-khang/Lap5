@@ -1,0 +1,18 @@
+<%- include('../partials/header') %>
+    <h1>Add Product</h1>
+
+    <form action="/products" method="POST" class="form">
+        <label>Name</label>
+        <input type="text" name="name" required>
+
+        <label>Price</label>
+        <input type="number" name="price">
+
+        <label>Quantity</label>
+        <input type="number" name="quantity">
+
+        <button type="submit">Save</button>
+    </form>
+
+    <a href="/products">⬅ Back to Products</a>
+    <%- include('../partials/footer') %>

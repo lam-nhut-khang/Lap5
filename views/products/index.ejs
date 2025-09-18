@@ -1,0 +1,16 @@
+<%- include('../partials/header') %>
+    <h1>Product List</h1>
+    <a href="/products/new">➕ Add Product</a>
+    <ul>
+        <% products.forEach(p => { %>
+            <li>
+                <%= p.name %> -
+                    <%= p.price %>
+                        <a href="/products/<%= p._id %>/edit">✏️ Edit</a>
+                        <form action="/products/<%= p._id %>?_method=DELETE" method="POST" style="display:inline">
+                            <button type="submit">🗑 Delete</button>
+                        </form>
+            </li>
+            <% }) %>
+    </ul>
+    <%- include('../partials/footer') %>

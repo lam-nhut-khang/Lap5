@@ -1,33 +1,56 @@
 const Product = require("../models/Product");
-const Supplier = require("../models/Supplier");
 
-exports.index = async (req, res) => {
-  const products = await Product.find().populate("supplier");
-  res.render("products/index", { products });
+// Hiển thị danh sách sản phẩm
+exports.index = async(req, res) => {
+    try {
+        const products = await Product.find();
+        res.render("products/index", { products });
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
 };
 
-exports.newForm = async (req, res) => {
-  const suppliers = await Supplier.find();
-  res.render("products/new", { suppliers });
+// Form thêm mới
+exports.newForm = (req, res) => {
+    res.render("products/new");
 };
 
-exports.create = async (req, res) => {
-  await Product.create(req.body);
-  res.redirect("/products");
+// Tạo mới
+exports.create = async(req, res) => {
+    try {
+        await Product.create(req.body);
+        res.redirect("/products");
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
 };
 
-exports.editForm = async (req, res) => {
-  const product = await Product.findById(req.params.id);
-  const suppliers = await Supplier.find();
-  res.render("products/edit", { product, suppliers });
+// Form chỉnh sửa
+exports.editForm = async(req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        res.render("products/edit", { product });
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
 };
 
-exports.update = async (req, res) => {
-  await Product.findByIdAndUpdate(req.params.id, req.body);
-  res.redirect("/products");
+// Cập nhật
+exports.update = async(req, res) => {
+    try {
+        await Product.findByIdAndUpdate(req.params.id, req.body);
+        res.redirect("/products");
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
 };
 
-exports.delete = async (req, res) => {
-  await Product.findByIdAndDelete(req.params.id);
-  res.redirect("/products");
+// Xóa
+exports.delete = async(req, res) => {
+    try {
+        await Product.findByIdAndDelete(req.params.id);
+        res.redirect("/products");
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
 };
