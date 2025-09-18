@@ -1,4 +1,17 @@
 <%- include('partials/header') %>
+
     <h1>Welcome</h1>
-    <a href="/suppliers">Manage Suppliers</a> | <a href="/products">Manage Products</a>
-    <%- include('partials/footer') %>
+
+    <a href="/suppliers">Manage Suppliers</a> |
+    <a href="/products">Manage Products</a> |
+
+    <% if (user) { %>
+        <!-- Nếu đã đăng nhập -->
+        <span>Xin chào, <%= user.username %>!</span>
+        <a href="/auth/logout">Logout</a>
+        <% } else { %>
+            <!-- Nếu chưa đăng nhập -->
+            <a href="/auth/login">Login</a>
+            <% } %>
+
+                <%- include('partials/footer') %>
